@@ -54,4 +54,8 @@ Global
 		{3AD6AEF7-4C8F-45C7-948B-0BDC340F572F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{3AD6AEF7-4C8F-45C7-948B-0BDC340F572F}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.VersionControlPolicy = $1
+	EndGlobalSection
 EndGlobal
