@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using Plugin.Geolocator;
+using TravelRecordApp.Logic;
+using Xamarin.Forms;
 
 namespace TravelRecordApp
 {
@@ -7,7 +9,12 @@ namespace TravelRecordApp
         public TravelRecordAppPage()
         {
             InitializeComponent();
+
+            var assembly = typeof(TravelRecordAppPage);
+            iconImage.Source = ImageSource.FromResource("TravelRecordApp.Assets.Images.plane.png", assembly);
+
         }
+
 
         void LoginButton_Clicked(object sender, System.EventArgs e)
         {
@@ -25,5 +32,9 @@ namespace TravelRecordApp
 
         }
 
+        void regsiterButton_Clicked(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new RegsiterPage());
+        }
     }
 }
