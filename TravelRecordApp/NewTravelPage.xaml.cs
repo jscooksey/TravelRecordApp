@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Plugin.Geolocator;
 using SQLite;
-using TravelRecordApp.Logic;
 using TravelRecordApp.Model;
 using Xamarin.Forms;
 
@@ -23,12 +22,12 @@ namespace TravelRecordApp
             var locator = CrossGeolocator.Current;
             var position = await locator.GetPositionAsync();
 
-            var venues = await VenueLogic.GetVenues(position.Latitude, position.Longitude);
+            var venues = await Venue.GetVenues(position.Latitude, position.Longitude);
 
             venueListView.ItemsSource = venues;
         }
 
-        void Save_Clicked(object sender, System.EventArgs e)
+        private async void Save_Clicked(object sender, System.EventArgs e)
         {
             try
             {
@@ -43,11 +42,12 @@ namespace TravelRecordApp
                     Distance = selectedVenue.location.distance,
                     Longitude = selectedVenue.location.lng,
                     Latitude = selectedVenue.location.lat,
-                    VenuName = selectedVenue.name
+                    VenuName = selectedVenue.name,
+                    UserId = App.user.Id
 
                 };
 
-                using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+                /* using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
                 {
 
                     conn.CreateTable<Post>();
@@ -57,15 +57,19 @@ namespace TravelRecordApp
                         DisplayAlert("Success", "Experience has been saved", "OK");
                     else
                         DisplayAlert("Failure", "Experience failed to save", "OK");
-                }
+                } */
+
+                Post.Insert(post);
+                await DisplayAlert("Success", "Experience has been saved", "OK");
+
             }
-            catch(NullReferenceException nre)
+            catch (NullReferenceException nre)
             {
-                
+                await DisplayAlert("Failure", "Experience failed to save", "OK");
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
-                
+                await DisplayAlert("Failure", "Experience failed to save", "OK");
             }
         }
     }

@@ -29,15 +29,18 @@ namespace TravelRecordApp
             var center = new Xamarin.Forms.Maps.Position(position.Latitude, position.Longitude);
             var span = new Xamarin.Forms.Maps.MapSpan(center, 2, 2);
             locationsMap.MoveToRegion(span);
-        
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+
+            /* using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
                 conn.CreateTable<Post>();
                 var posts = conn.Table<Post>().ToList();
 
                 DisplayInMap(posts);
               
-            }
+            } */
+
+            var posts = await Post.Read();
+            DisplayInMap(posts);
         }
 
         protected override async void OnDisappearing()

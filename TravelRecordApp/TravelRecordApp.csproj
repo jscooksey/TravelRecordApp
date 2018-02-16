@@ -51,7 +51,7 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Assets\Images\plane.png" />
-    <EmbeddedResource Include="RegsiterPage.xaml">
+    <EmbeddedResource Include="RegisterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -82,10 +82,10 @@
     <Compile Include="Model\Post.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Model\Venue.cs" />
-    <Compile Include="Logic\VenueLogic.cs" />
-    <Compile Include="RegsiterPage.xaml.cs">
-      <DependentUpon>RegsiterPage.xaml</DependentUpon>
+    <Compile Include="RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -141,7 +141,6 @@
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Logic\" />
     <Folder Include="Assets\" />
     <Folder Include="Assets\Images\" />
   </ItemGroup>

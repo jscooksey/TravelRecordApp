@@ -1,5 +1,5 @@
-﻿using Plugin.Geolocator;
-using TravelRecordApp.Logic;
+﻿using System.Linq;
+using TravelRecordApp.Model;
 using Xamarin.Forms;
 
 namespace TravelRecordApp
@@ -16,25 +16,42 @@ namespace TravelRecordApp
         }
 
 
-        void LoginButton_Clicked(object sender, System.EventArgs e)
+        private async void LoginButton_Clicked(object sender, System.EventArgs e)
         {
-            bool isEmailEmpty = string.IsNullOrEmpty(emailEntry.Text);
-            bool isPasswordEmpty = string.IsNullOrEmpty(passwordEntry.Text);
+            /* bool isEmailEmpty = string.IsNullOrEmpty(emailEntry.Text);
+             bool isPasswordEmpty = string.IsNullOrEmpty(passwordEntry.Text);
 
-            if (isEmailEmpty || isPasswordEmpty)
-            {
-                
-            }
+             if (isEmailEmpty || isPasswordEmpty)
+             {
+
+             }
+             else
+             {
+                 var user = (await App.MobileService.GetTable<User>().Where(u => u.Email == emailEntry.Text).ToListAsync()).FirstOrDefault();
+                 if(user != null)
+                 {
+                     App.user = user;
+                     if(user.Password == passwordEntry.Text)
+                         await Navigation.PushAsync(new HomePage());
+                     else
+                         await DisplayAlert("Error","User or password are incorrect","OK"); 
+                 }
+                 else
+                 {
+                     await DisplayAlert("Error","User or password are incorrect","OK");    
+                 }
+             } */
+
+            var canLogin = await User.Login(emailEntry.Text, passwordEntry.Text);
+            if(canLogin)
+                await Navigation.PushAsync(new HomePage());
             else
-            {
-                Navigation.PushAsync(new HomePage());
-            }
-
+                await DisplayAlert("Error", "User or password are incorrect", "OK");
         }
 
-        void regsiterButton_Clicked(object sender, System.EventArgs e)
+        void registerButton_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new RegsiterPage());
+            Navigation.PushAsync(new RegisterPage());
         }
     }
 }
